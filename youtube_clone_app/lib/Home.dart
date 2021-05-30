@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:youtube_clone_app/telas/Biblioteca.dart';
+import 'package:youtube_clone_app/telas/EmAlta.dart';
+import 'package:youtube_clone_app/telas/Inicio.dart';
+import 'package:youtube_clone_app/telas/Inscricoes.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -6,8 +10,75 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  // variaveis
+  int _indiceAtual = 0;
+
+  //*** */
+
   @override
   Widget build(BuildContext context) {
-    return Container();
+    // telas
+    List<Widget> telas = [Inicio(), EmAlta(), Inscricoes(), Biblioteca()];
+
+    return Scaffold(
+      appBar: AppBar(
+        iconTheme: IconThemeData(color: Colors.grey, opacity: 1),
+        backgroundColor: Colors.white, // Cor de fundo
+        title: Image.asset(
+          "images/logo_youtube.png",
+          width: 98,
+          height: 22,
+        ),
+        actions: [
+          // botao camera
+          IconButton(
+            icon: Icon(Icons.videocam),
+            onPressed: () {
+              print("Adiconar Vídeo");
+            },
+          ),
+          // Fim botao camera
+
+          // botao pesquisar
+          IconButton(
+            icon: Icon(Icons.search),
+            onPressed: () {
+              print("Pesquisar Vídeo");
+            },
+          ),
+          // Fim botao pesquisar
+
+          // botao perfil
+          IconButton(
+            icon: Icon(Icons.account_circle),
+            onPressed: () {
+              print("Acessar Perfil");
+            },
+          )
+          // Fim botao perfil
+        ],
+      ),
+      body: telas[_indiceAtual],
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _indiceAtual,
+        onTap: (indice) {
+          setState(() {
+            _indiceAtual = indice;
+          });
+        },
+        type: BottomNavigationBarType.fixed,
+        fixedColor: Colors.red,
+        items: [
+          BottomNavigationBarItem(
+              title: Text("Início"), icon: Icon(Icons.home)),
+          BottomNavigationBarItem(
+              title: Text("Em alta"), icon: Icon(Icons.whatshot)),
+          BottomNavigationBarItem(
+              title: Text("Inscrições"), icon: Icon(Icons.subscriptions)),
+          BottomNavigationBarItem(
+              title: Text("Biblioteca"), icon: Icon(Icons.folder))
+        ],
+      ),
+    );
   }
 }
