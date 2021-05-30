@@ -9,7 +9,7 @@ const URL_BASE = "https://www.googleapis.com/youtube/v3/";
 
 class Api {
   // método para pesquisa de videos
-  pesquisar(String pesquisa) async {
+  Future<List<Video>> pesquisar(String pesquisa) async {
     http.Response response = await http.get(URL_BASE +
         "search"
             "?part=snippet"
@@ -26,11 +26,8 @@ class Api {
         return Video.fromJson(map);
       }).toList();
 
-      for (var video in videos) {
-        print("Resultado: " + video.title);
-        print("Resultado: " + video.image);
-        print("Resultado: " + video.channel);
-      }
+      return videos;
+
     } else {
       print("Erro");
     }

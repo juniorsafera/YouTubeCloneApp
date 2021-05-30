@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:youtube_clone_app/CustomSearchDelegate.dart';
 import 'package:youtube_clone_app/telas/Biblioteca.dart';
 import 'package:youtube_clone_app/telas/EmAlta.dart';
 import 'package:youtube_clone_app/telas/Inicio.dart';
@@ -18,7 +19,13 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     // list para chamar telas
-    List<Widget> telas = [Inicio(), EmAlta(), Inscricoes(), Biblioteca()];
+    String _resultado = "";
+    List<Widget> telas = [
+      Inicio(_resultado),
+      EmAlta(),
+      Inscricoes(),
+      Biblioteca()
+    ];
     // fim list
 
     return Scaffold(
@@ -31,32 +38,18 @@ class _HomeState extends State<Home> {
           height: 22,
         ),
         actions: [
-          // botao camera
-          IconButton(
-            icon: Icon(Icons.videocam),
-            onPressed: () {
-              print("Adiconar Vídeo");
-            },
-          ),
-          // Fim botao camera
-
           // botao pesquisar
           IconButton(
             icon: Icon(Icons.search),
-            onPressed: () {
-              print("Pesquisar Vídeo");
+            onPressed: () async {
+              String res = await showSearch(
+                  context: context, delegate: CustomSearchDelegate());
+              setState(() {
+                _resultado = res;
+              });
             },
           ),
           // Fim botao pesquisar
-
-          // botao perfil
-          IconButton(
-            icon: Icon(Icons.account_circle),
-            onPressed: () {
-              print("Acessar Perfil");
-            },
-          )
-          // Fim botao perfil
         ],
       ),
       body: telas[_indiceAtual],
