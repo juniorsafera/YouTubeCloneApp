@@ -13,12 +13,13 @@ class _HomeState extends State<Home> {
   // variaveis
   int _indiceAtual = 0;
 
-  //*** */
+  //fim variaveis
 
   @override
   Widget build(BuildContext context) {
-    // telas
+    // list para chamar telas
     List<Widget> telas = [Inicio(), EmAlta(), Inscricoes(), Biblioteca()];
+    // fim list
 
     return Scaffold(
       appBar: AppBar(
