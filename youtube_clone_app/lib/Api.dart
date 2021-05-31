@@ -27,7 +27,6 @@ class Api {
       }).toList();
 
       return videos;
-
     } else {
       print("Erro");
     }

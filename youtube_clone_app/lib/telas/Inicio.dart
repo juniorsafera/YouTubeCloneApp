@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:youtube_clone_app/Api.dart';
 import 'package:youtube_clone_app/model/Video.dart';
+import 'package:flutter_youtube/flutter_youtube.dart';
 
 class Inicio extends StatefulWidget {
   String pesquisa;
@@ -42,20 +43,30 @@ class _InicioState extends State<Inicio> {
                   itemBuilder: (context, index) {
                     List<Video> videos = snapshot.data;
                     Video video = videos[index];
-                    return Column(
-                      children: [
-                        Container(
-                          height: 200,
-                          decoration: BoxDecoration(
-                              image: DecorationImage(
-                                  fit: BoxFit.cover,
-                                  image: NetworkImage(video.image))),
-                        ),
-                        ListTile(
-                          title: Text(video.title),
-                          subtitle: Text(video.channel),
-                        )
-                      ],
+                    return GestureDetector(
+                      // Para adicionar evento na coluna (Image e Title)
+                      onTap: () {
+                        FlutterYoutube.playYoutubeVideoById(
+                            apiKey: CHAVE_YOUTUBE_API,
+                            videoId: video.id,
+                            autoPlay: true,
+                            fullScreen: true);
+                      },
+                      child: Column(
+                        children: [
+                          Container(
+                            height: 200,
+                            decoration: BoxDecoration(
+                                image: DecorationImage(
+                                    fit: BoxFit.cover,
+                                    image: NetworkImage(video.image))),
+                          ),
+                          ListTile(
+                            title: Text(video.title),
+                            subtitle: Text(video.channel),
+                          )
+                        ],
+                      ),
                     );
                   },
                   separatorBuilder: (contex, index) =>
