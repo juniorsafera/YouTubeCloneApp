@@ -13,6 +13,7 @@ class Inicio extends StatefulWidget {
 
 class _InicioState extends State<Inicio> {
   // Métodos
+
   _listarVideos(String pesquisa) {
     Future<List<Video>> videos;
     Api api = Api();

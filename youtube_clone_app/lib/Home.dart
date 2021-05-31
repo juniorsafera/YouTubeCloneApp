@@ -13,13 +13,14 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   // variaveis
   int _indiceAtual = 0;
+  String _resultado = "";
 
   //fim variaveis
 
   @override
   Widget build(BuildContext context) {
     // list para chamar telas
-    String _resultado = "";
+
     List<Widget> telas = [
       Inicio(_resultado),
       EmAlta(),
